@@ -38,6 +38,9 @@ function eq_test(one, two) {
         // TODO: eq_test({},{foo:4}) will return true
         // Recurse on each property of object
         for (var key in one) {
+            if(typeof one[key] === 'string'){
+                one[key] = one[key].replace(/\nFailed assertion([\r\n]|.)*/m, "");
+            }
             if (one.hasOwnProperty(key)) {
                 if (!eq_test(one[key], two[key])) return false;
             }
